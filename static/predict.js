@@ -37,9 +37,11 @@ $("#predict-button").click(async function () {
 		.resizeNearestNeighbor([224, 224]) // change the image size
 		.expandDims()
 		.toFloat(); // RGB -> BGR
+	console.log(JSON.stringify(tensor));
 	let predictions = await model.predict(tensor).data();
+	console.log(model.predict(tensor).loadGraphModel);
 	console.log(predictions);
-	let top5 = Array.from(predictions)
+	let top1 = Array.from(predictions)
 		.map(function (p, i) { // this is Array.map
 			return {
 				probability: p,
@@ -47,12 +49,13 @@ $("#predict-button").click(async function () {
 			};
 		}).sort(function (a, b) {
 			return b.probability - a.probability;
-		}).slice(0, 2);
+		}).slice(0, 1);
 
-	console.log(top5)
+	console.log(top1)
 
 	$("#prediction-list").empty();
-	top5.forEach(function (p) {
-		$("#prediction-list").append(`<li>${p.className}: ${p.probability.toFixed(6)}</li>`);
+	top1.forEach(function (p) {
+		$("#prediction-list").append(`<li>[${p.className}] 맞나요?</li>`);
+		$("#prediction-list").append(`<li>정확도 : ${p.probability.toFixed(3) * 100}%</li>`);
 		});
 });

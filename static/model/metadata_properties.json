@@ -1,7 +1,7 @@
 {
     "CustomVision.Metadata.AdditionalModelInfo": "",
     "CustomVision.Metadata.Version": "1.2",
-    "CustomVision.Postprocess.Method": "ClassificationMultiClass",
+    "CustomVision.Postprocess.Method": "ClassificationMultiLabel",
     "CustomVision.Postprocess.Yolo.Biases": "[]",
     "CustomVision.Postprocess.Yolo.NmsThreshold": "0.0",
     "CustomVision.Preprocess.CropHeight": "224",
